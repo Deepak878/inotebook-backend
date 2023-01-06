@@ -5,7 +5,9 @@ connectToMongo();
 
 const app = express();
 const port = 5000;
+var cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
 //Available ROutes
 app.use("/api/auth", require("./routes/auth"));
@@ -16,5 +18,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`iNotebook backend listening on port ${port}`);
 });
