@@ -82,6 +82,7 @@ export const Notes = () => {
                     name="etitle"
                     aria-describedby="emailHelp"
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -95,6 +96,7 @@ export const Notes = () => {
                     value={note.edescription}
                     name="edescription"
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -129,6 +131,9 @@ export const Notes = () => {
                 Close
               </button>
               <button
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
                 onClick={handleClick}
                 type="button"
                 className="btn btn-primary"
@@ -139,9 +144,11 @@ export const Notes = () => {
           </div>
         </div>
       </div>
-      <div className="row my-3">
+      <div className="container row my-3">
         <h2>Your Notes</h2>
-        {notes.length == 0 && "No notes to display"}
+        <div className="container">
+          {notes.length === 0 && `No notes to display`}
+        </div>
         {notes.map((note) => {
           return (
             <NoteItem key={note._id} note={note} updateNote={updateNote} />
