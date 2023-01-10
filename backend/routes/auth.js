@@ -17,10 +17,11 @@ router.post(
     }),
   ],
   async (req, res) => {
+    let success = false;
     //if there are errors, return bad request and error message
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success, errors: errors.array() });
     }
     //check whether the user with same email exists already
     try {
@@ -29,7 +30,10 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ error: "Sorry a user with this email already exist" });
+          .json({
+            success,
+            error: "Sorry a user with this email already exist",
+          });
       }
       const salt = await bcrypt.genSalt(10);
       const securePassword = await bcrypt.hash(req.body.password, salt);
@@ -46,7 +50,8 @@ router.post(
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
       console.log(authtoken);
-      res.json({ authtoken });
+      success = true;
+      res.json({ success, authtoken });
       //catch errors
     } catch (error) {
       console.error(error.message);
@@ -64,6 +69,7 @@ router.post(
     body("password", "Password can't be blank").exists(),
   ],
   async (req, res) => {
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -73,13 +79,16 @@ router.post(
       let user = await User.findOne({ email });
       //console.log(user);
       if (!user) {
+        success = false;
         return res.status(400).json({
           error: "Please try to login with correct Credientials",
         });
       }
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
+        success = false;
         return res.status(400).json({
+          success,
           error: "Please try to login with correct Credientials",
         });
       }
@@ -89,7 +98,8 @@ router.post(
         },
       };
       const authtoken = jwt.sign(payload, JWT_SECRET);
-      res.json({ authtoken });
+      success = true;
+      res.json({ success, authtoken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error Occured");

@@ -47,12 +47,12 @@ export const Navbar = () => {
             </li>
           </ul>
           <form className="d-flex">
-            <a className="btn btn-primary mx-2" href="#" role="button">
+            <Link className="btn btn-primary mx-1" to="/login" role="button">
               Login
-            </a>
-            <a className="btn btn-primary mx-2" href="#" role="button">
+            </Link>
+            <Link className="btn btn-primary mx-1" to="/signup" role="button">
               Signup
-            </a>
+            </Link>
           </form>
         </div>
       </div>
