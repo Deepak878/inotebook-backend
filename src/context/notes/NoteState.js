@@ -15,8 +15,7 @@ const NoteState = (props) => {
 
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNiNDBmNTgxODFiY2NkMWI2OTI4YjNiIn0sImlhdCI6MTY3Mjc0NzgxMH0.hNepZecggxLfOQ5oa5sLr9xYgSwqj86ylgfH9AxWO4c",
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const json = await response.json();
@@ -33,8 +32,7 @@ const NoteState = (props) => {
 
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNiNDBmNTgxODFiY2NkMWI2OTI4YjNiIn0sImlhdCI6MTY3Mjc0NzgxMH0.hNepZecggxLfOQ5oa5sLr9xYgSwqj86ylgfH9AxWO4c",
+        "auth-token": localStorage.getItem("token"),
       },
 
       body: JSON.stringify({ title, description, tag }),
@@ -51,8 +49,7 @@ const NoteState = (props) => {
 
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNiNDBmNTgxODFiY2NkMWI2OTI4YjNiIn0sImlhdCI6MTY3Mjc0NzgxMH0.hNepZecggxLfOQ5oa5sLr9xYgSwqj86ylgfH9AxWO4c",
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const json = response.json();
@@ -71,8 +68,7 @@ const NoteState = (props) => {
 
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNiNDBmNTgxODFiY2NkMWI2OTI4YjNiIn0sImlhdCI6MTY3Mjc0NzgxMH0.hNepZecggxLfOQ5oa5sLr9xYgSwqj86ylgfH9AxWO4c",
+        "auth-token": localStorage.getItem("token"),
       },
 
       body: JSON.stringify({ title, description, tag }),
@@ -83,7 +79,7 @@ const NoteState = (props) => {
     //logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {
       const element = newNotes[index];
-      if (element._id == id) {
+      if (element._id === id) {
         newNotes[index].title = title;
         newNotes[index].description = description;
         newNotes[index].tag = tag;

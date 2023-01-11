@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Alert = (props) => {
+export function Alert(props) {
   // const capitalize = (word) => {
   //   if (word === "danger") {
   //     word = "error";
@@ -15,9 +15,9 @@ export const Alert = (props) => {
           className={`alert alert-${props.alert.type} alert-dismissible fade show`}
           role="alert"
         >
-          {/* <strong>{capitalize(props.alert.type)}</strong>: (props.alert.msg) */}
+          <strong>{props.alert.type}</strong>: {props.alert.msg}
         </div>
       )}
     </div>
   );
-};
+}
